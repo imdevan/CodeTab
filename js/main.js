@@ -1,4 +1,4 @@
-function log($stuff){console.log($stuff);}
+log = function ($stuff){console.log($stuff);};
 
 $ = function ($elm) {
     var element = {};
