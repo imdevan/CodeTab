@@ -1,0 +1,1 @@
+<?xml version="1.0"?><testsuites errors="1"><testsuite name="scss-lint" timestamp="2015-09-18T04:42:26"/><testcase name="_sass/base/_fonts.scss"><failure>_sass/base/_fonts.scss:2 [W] Indentation: Line should be indented with tabs, not spaces</failure></testcase></testsuites>

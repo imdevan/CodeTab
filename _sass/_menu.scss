@@ -1,0 +1,67 @@
+$curve: cubic-bezier(.87,-.41,.19,1.44);
+$initAnimation: .3s;
+$childAnimation: .3s;
+$childDelay: .15s; 
+$animation: slideIn;
+$childCount: 5;
+  
+@mixin delayChildren($i) {
+   @for $j from 0 through $i   {
+    &:nth-child(#{$j}) {
+      animation-delay: $j * $childDelay + $initAnimation;
+    } 
+  }
+}
+
+%centerFlex {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  @extend %centerFlex;
+  animation-fill-mode: forward;
+  animation: $animation $initAnimation $curve, boxShadow $childAnimation*$childCount linear $initAnimation;
+  transform: translateX(100%);
+  animation-fill-mode: forwards;
+
+  background: cadetblue;
+  color: #fff;
+  flex-flow: row wrap;
+  font-size: 1.5em;
+  height: 100%;
+  position: fixed;
+  right: 0;
+  width: 25%;
+
+  &--item {
+    @extend %centerFlex;
+    @include delayChildren($childCount);
+    align-items: center;
+    animation: $animation $childAnimation $curve;
+    animation-fill-mode: forwards;
+    box-sizing: border-box;
+    height: 100%/$childCount;
+    padding: 3rem;
+    transform: translateX(100%);
+    width: 100%;
+  }
+}
+
+
+@keyframes slideIn {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0%); }
+}
+
+@keyframes boxShadow {
+  0% { box-shadow: 0 0 0 rgba(black, 0.5);  }
+  100% { box-shadow: 0 0 1.67rem rgba(black, 0.5); }
+}
+
+
+
+
+body {
+  padding: 0; margin: 0; font-family: Helvetica, Sans-serif; 
+}
