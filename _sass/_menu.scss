@@ -1,6 +1,6 @@
 $curve: cubic-bezier(.87,-.41,.19,1.44);
-$initAnimation: .3s;
-$childAnimation: .3s;
+$initAnimation: 0.5s;
+$childAnimation: 0.7s;
 $childDelay: .15s; 
 $animation: slideIn;
 $childCount: 5;
@@ -8,7 +8,7 @@ $childCount: 5;
 @mixin delayChildren($i) {
    @for $j from 0 through $i   {
     &:nth-child(#{$j}) {
-      animation-delay: $j * $childDelay + $initAnimation;
+      animation-delay: $j * $childDelay;
     } 
   }
 }
@@ -19,20 +19,33 @@ $childCount: 5;
 }
 
 .menu {
-  @extend %centerFlex;
-  animation-fill-mode: forward;
-  animation: $animation $initAnimation $curve, boxShadow $childAnimation*$childCount linear $initAnimation;
-  transform: translateX(100%);
-  animation-fill-mode: forwards;
 
-  background: cadetblue;
-  color: #fff;
-  flex-flow: row wrap;
-  font-size: 1.5em;
-  height: 100%;
-  position: fixed;
-  right: 0;
-  width: 25%;
+  &--open-button {
+    background-color: salmon;
+    display: block;
+    position: fixed;
+    top: 2em;
+    right: 2em;
+    height: 2em;
+    width: 2em;
+  }
+
+  &--container {
+    @extend %centerFlex;
+    animation-fill-mode: forward;
+    animation: $animation $initAnimation $curve, boxShadow $childAnimation*$childCount linear $initAnimation;
+    transform: translateX(100%);
+    animation-fill-mode: forwards;
+
+    background: cadetblue;
+    color: #fff;
+    flex-flow: row wrap;
+    font-size: 1.5em;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    width: 25%;
+  }
 
   &--item {
     @extend %centerFlex;
