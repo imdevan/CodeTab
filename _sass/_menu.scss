@@ -8,7 +8,7 @@ $childCount: 5;
 @mixin delayChildren($i) {
    @for $j from 0 through $i   {
     &:nth-child(#{$j}) {
-      animation-delay: $j * $childDelay;
+      transition-delay: $j * $childDelay;
     } 
   }
 }
@@ -32,10 +32,10 @@ $childCount: 5;
 
   &--container {
     @extend %centerFlex;
-    animation-fill-mode: forward;
-    animation: $animation $initAnimation $curve, boxShadow $childAnimation*$childCount linear $initAnimation;
+    transition: transform $initAnimation $curve, box-shadow $childAnimation*$childCount linear $initAnimation;
+
     transform: translateX(100%);
-    animation-fill-mode: forwards;
+    box-shadow: 0 0 0 rgba(black, .5);
 
     background: cadetblue;
     color: #fff;
@@ -50,29 +50,27 @@ $childCount: 5;
   &--item {
     @extend %centerFlex;
     @include delayChildren($childCount);
-    align-items: center;
-    animation: $animation $childAnimation $curve;
-    animation-fill-mode: forwards;
+    transition: transform  $childAnimation $curve;
+    transform: translateX(100%);
+
     box-sizing: border-box;
     height: 100%/$childCount;
     padding: 3rem;
-    transform: translateX(100%);
     width: 100%;
   }
 }
 
-
-@keyframes slideIn {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(0%); }
+.open {
+  .menu {
+    &--container {
+      box-shadow: 0 0 1.67rem rgba(black, 0.5); 
+      transform: translateX(0%);
+    }
+    &--item {
+      transform: translateX(0%);
+    }
+  }
 }
-
-@keyframes boxShadow {
-  0% { box-shadow: 0 0 0 rgba(black, 0.5);  }
-  100% { box-shadow: 0 0 1.67rem rgba(black, 0.5); }
-}
-
-
 
 
 body {

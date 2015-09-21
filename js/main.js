@@ -1,25 +1,47 @@
-gbi = function ($id) {
+function log($stuff){console.log($stuff);}
+
+$ = function ($elm) {
+    var element = {};
+    if($elm.obj !== undefined) {
+        return $elm;
+    } 
+    else if (typeof $elm === "string") {
+        element = document.querySelector($elm);
+    }
+    else if (typeof $elm === "object") {
+        element = $elm;
+    }
+
     return {
-        obj: document.getElementById($id),
+        obj: element,
         addClass: function ($class) {
-            console.log($class);
-            this.obj.className = this.obj.className + " " + $class;
+            this.obj.classList.add($class);
+        },
+        removeClass: function ($class) {
+            this.obj.classList.remove($class);
+        },
+        hasClass: function ($class) {
+            return this.obj.classList.contains($class);
         },
         click: function ($funstuff) {
-            this.obj.onclick = $funstuff();
+            this.obj.addEventListener("click", $funstuff);
+        },
+        parent: function () {
+            return this.obj.parentElement
         }
     }
 }
 
-log = function ($msg) {
-    return console.log($msg);
-}
+var menuButton = $('#menu--open-button');
+var menu = $(menuButton.parent());
 
-var menuButton = gbi('menu--open-button');
-
-menuButton.obj.onclick = function () {
-    this.className = this.className + " open";
-}
 menuButton.click(function () {
-    menuButton.addClass('open');
+    menu.addClass("open");
 });
+
+document.onkeydown = function(evt) {
+    evt = evt || window.event;
+    if (evt.keyCode == 27) {
+        menu.removeClass("open");
+    }
+};
