@@ -4,7 +4,8 @@ $childAnimation: 0.7s;
 $childDelay: .15s; 
 $animation: slideIn;
 $childCount: 5;
-  
+$button-size: 5rem;
+
 @mixin delayChildren($i) {
    @for $j from 0 through $i   {
     &:nth-child(#{$j}) {
@@ -19,15 +20,20 @@ $childCount: 5;
 }
 
 .menu {
+  
 
   &--open-button {
-    background-color: salmon;
-    display: block;
+    font-size: 3em;
+    text-shadow: 0 0 20px rgba(black, 0.35);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
-    top: 2em;
-    right: 2em;
-    height: 2em;
-    width: 2em;
+    top: 4rem;
+    right: 2rem;
+    height: $button-size;
+    width: $button-size;
+    z-index: 2;
   }
 
   &--container {
