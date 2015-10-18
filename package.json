@@ -6,6 +6,9 @@
     "type": "git",
     "url": "https://ibm.biz/ibm-radio"
   },
+  "scripts": {
+    "start": "grunt"
+  },
   "author": "@devanipsum",
   "license": "MIT",
   "devDependencies": {
