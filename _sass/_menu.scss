@@ -23,24 +23,7 @@ $button-size: 5rem;
 
 .menu {
     &--open-button {
-        position: fixed;
-        top: 5rem;
-        right: 2rem;
-        z-index: 2;
-
-        display: flex;
-        width: $button-size;
-        height: $button-size;
-
-        font-size: 3em;
-
-        cursor: pointer;
-        transition: transform $initAnimation $curve;
-
-        text-shadow: 0 0 20px rgba(black, .35);
-
-        align-items: center;
-        justify-content: center;
+        @extend %top-corner-button;
 
         &.open {
             transform: scale(0);
