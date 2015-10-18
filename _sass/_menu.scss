@@ -1,84 +1,103 @@
 $curve: cubic-bezier(.87,-.41,.19,1.44);
-$initAnimation: 0.5s;
-$childAnimation: 0.7s;
-$childDelay: .15s; 
+$initAnimation: .5s;
+$childAnimation: .7s;
+$childDelay: .15s;
 $animation: slideIn;
 $childCount: 5;
 $button-size: 5rem;
 
 @mixin delayChildren($i) {
-   @for $j from 0 through $i   {
-    &:nth-child(#{$j}) {
-      transition-delay: $j * $childDelay;
-    } 
-  }
+    @for $j from 0 through $i {
+        &:nth-child(#{$j}) {
+
+            transition-delay: $j * $childDelay;
+        }
+    }
 }
 
 %centerFlex {
-  display: flex;
-  align-items: center;
+    display: flex;
+
+    align-items: center;
 }
 
 .menu {
-  
+    &--open-button {
+        position: fixed;
+        top: 5rem;
+        right: 2rem;
+        z-index: 2;
 
-  &--open-button {
-    font-size: 3em;
-    text-shadow: 0 0 20px rgba(black, 0.35);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 4rem;
-    right: 2rem;
-    height: $button-size;
-    width: $button-size;
-    z-index: 2;
-  }
+        display: flex;
+        width: $button-size;
+        height: $button-size;
 
-  &--container {
-    @extend %centerFlex;
-    transition: transform $initAnimation $curve, box-shadow $childAnimation*$childCount linear $initAnimation;
+        font-size: 3em;
 
-    transform: translateX(100%);
-    box-shadow: 0 0 0 rgba(black, .5);
+        cursor: pointer;
+        transition: transform $initAnimation $curve;
 
-    background: cadetblue;
-    color: #fff;
-    flex-flow: row wrap;
-    font-size: 1.5em;
-    height: 100%;
-    position: fixed;
-    right: 0;
-    width: 25%;
-  }
+        text-shadow: 0 0 20px rgba(black, .35);
 
-  &--item {
-    @extend %centerFlex;
-    @include delayChildren($childCount);
-    transition: transform  $childAnimation $curve;
-    transform: translateX(100%);
+        align-items: center;
+        justify-content: center;
 
-    box-sizing: border-box;
-    height: 100%/$childCount;
-    padding: 3rem;
-    width: 100%;
-  }
+        &.open {
+            transform: scale(0);
+        }
+    }
+
+    &--container {
+        position: fixed;
+        right: 0;
+
+        width: 25%;
+        height: 100%;
+
+        font-size: 1.5em;
+
+        transition: transform $initAnimation $curve, box-shadow $childAnimation*$childCount linear $initAnimation;
+        transform: translateX(100%);
+
+        color: #fff;
+        background: cadetblue;
+        box-shadow: 0 0 0 rgba(black, .5);
+
+        @extend %centerFlex;
+        flex-flow: row wrap;
+    }
+
+    &--item {
+        width: 100%;
+        height: 100%/$childCount;
+        padding: 3rem;
+        box-sizing: border-box;
+
+        transition: transform  $childAnimation $curve;
+        transform: translateX(100%);
+
+        @extend %centerFlex;
+        @include delayChildren($childCount);
+    }
 }
 
 .open {
-  .menu {
-    &--container {
-      box-shadow: 0 0 1.67rem rgba(black, 0.5); 
-      transform: translateX(0%);
+    .menu {
+        &--container {
+            transform: translateX(0%);
+
+            box-shadow: 0 0 1.67rem rgba(black, .5);
+        }
+        &--item {
+            transform: translateX(0%);
+        }
     }
-    &--item {
-      transform: translateX(0%);
-    }
-  }
 }
 
 
 body {
-  padding: 0; margin: 0; font-family: Helvetica, Sans-serif; 
+    padding: 0;
+    margin: 0;
+
+    font-family: Helvetica, Sans-serif;
 }

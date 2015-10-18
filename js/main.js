@@ -37,11 +37,13 @@ var menu = $(menuButton.parent());
 
 menuButton.click(function () {
     menu.addClass("open");
+    menuButton.addClass("open");
 });
 
 document.onkeydown = function(evt) {
     evt = evt || window.event;
     if (evt.keyCode == 27) {
         menu.removeClass("open");
+        menuButton.removeClass("open");
     }
 };
