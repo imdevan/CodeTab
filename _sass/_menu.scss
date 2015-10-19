@@ -22,6 +22,10 @@ $childCount: 5;
         &.open {
             transform: scale(0);
         }
+        
+        &:hover {
+            transform: scale(1.25);
+        }
     }
 
     &--container {
@@ -69,12 +73,4 @@ $childCount: 5;
             transform: translateX(0%);
         }
     }
-}
-
-
-body {
-    padding: 0;
-    margin: 0;
-
-    font-family: Helvetica, Sans-serif;
 }
